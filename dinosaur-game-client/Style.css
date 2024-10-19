@@ -1,0 +1,273 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden; /* Prevent the viewport from expanding horizontally */
+}
+
+@font-face {
+    font-family: 'Press Start 2P';
+    src: url('fonts/PressStart2P-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+#solid_background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1;
+    background-image: url('icons/background_background.webp');
+    background-size: cover;
+    background-position: center;
+}
+
+#pokeball {
+    position: fixed;
+    top: 90px;
+    right: 100px;
+}
+
+#pokeball-image {
+    width: 90px;  /* Adjust the size of the Pokéball */
+    height: auto;  /* Maintain the aspect ratio of the Pokéball */
+}
+
+/* Highscore Menu */
+#highscore-menu {
+    position: fixed;
+    top: 200px;
+    right: 0; /* Align it fully to the right */
+    width: 300px;
+    height: 400px;
+    background-image: url('icons/pokedex_blank.png'); /* Directly set the background image */
+    background-size: contain; /* Make sure the entire image fits in the container without cropping */
+    background-repeat: no-repeat; /* Prevent the image from repeating */
+    background-position: center; /* Center the background image */
+    overflow: hidden; /* Hide anything that goes outside the container */
+    z-index: 5; /* Ensure the high score menu is layered correctly */
+}
+
+/* Pokedex screen where high scores will be shown */
+.pokedex-screen {
+    position: absolute;
+    top: 90px; /* Adjust to match the Pokedex screen area */
+    left: 70px; /* Adjust based on your image */
+    width: 150px; /* Set width to fit the screen area */
+    height: 150px; /* Limit height to display a maximum of 5 items */
+    border-radius: 10px; /* Optional: Add rounded corners */
+    padding: 10px;
+    z-index: 10; /* Ensure it's above the Pokedex image */
+    max-height: 250px; /* Limit the scrolling container to fit 250 items */
+    overflow: hidden; /* Ensure only the list scrolls, not the whole container */
+    display: flex;
+    flex-direction: column; /* Use flex layout for static title and scrollable list */
+}
+
+/* Static title at the top of the highscore menu */
+#highscore-title {
+    text-align: center; /* Center the title */
+    font-size: 10px; /* Adjust font size */
+    margin-bottom: 10px; /* Add space below the title */
+    color: rgb(66, 52, 52); /* Same color as the high score text */
+    font-family: 'Press Start 2P', sans-serif; /* Apply the custom font */
+    flex-shrink: 0; /* Prevent the title from shrinking when scrolling */
+    position: relative; /* Keep the title static within the container */
+    z-index: 1; /* Ensure it stays on top */
+}
+
+/* Highscore list styles - Make only the list scrollable */
+#highscore-list {
+    padding: 10px; /* Adjust this for padding inside the screen */
+    list-style: none; /* Remove bullets */
+    margin: 0;
+    z-index: 1; /* Ensure the list is on top of the background */
+    overflow-y: scroll; /* Always show the scrollbar */
+    flex-grow: 1; /* Allow the list to take up the remaining space */
+    scrollbar-width: auto; /* Ensure the scrollbar is always visible in Firefox */
+}
+
+/* Highscore list item styles */
+#highscore-list li {
+    margin: 10px 0; /* Space between high score entries */
+    font-size: 8px; /* Adjust font size */
+    color: rgb(66, 52, 52); /* Set the text color */
+    font-family: 'Press Start 2P', sans-serif; /* Apply the custom font */
+}
+
+/* Custom scrollbar styling */
+#highscore-list::-webkit-scrollbar {
+    width: 6px; /* Make the scrollbar thinner */
+}
+
+#highscore-list::-webkit-scrollbar-thumb {
+    background-color: rgba(66, 52, 52, 0.7); /* Set color for the scrollbar thumb (darker) */
+    border-radius: 10px; /* Rounded corners on the scrollbar */
+    border: 1px solid rgba(66, 52, 52, 0.2); /* Add a border to make it more visible */
+}
+
+#highscore-list::-webkit-scrollbar-track {
+    background-color: rgba(66, 52, 52, 0.2); /* Set color for the scrollbar track (lighter) */
+}
+
+/* Firefox-specific scrollbar styling */
+#highscore-list {
+    scrollbar-width: thin; /* Thinner scrollbar for Firefox */
+    scrollbar-color: rgba(66, 52, 52, 0.7) rgba(66, 52, 52, 0.2); /* Thumb color | Track color */
+}
+
+body {
+    background-color: #f0f0f0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.game-area {
+    width: 800px;
+    height: 300px;
+    background-color: #fff;
+    border: 2px solid black;
+    position: relative;
+    background-image: url('icons/background_moving.gif');
+    background-size: 100% 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    overflow: hidden; /* Ensure no content inside the game area overflows */
+}
+
+#dino {
+    width: 60px;
+    height: 60px;
+    left: 60px;
+    background-image: url('icons/Charmeleon.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    position: absolute;
+    bottom: 0;
+}
+
+#obstacle {
+    position: absolute;
+    bottom: 0;
+    left: 800px;
+    width: 50px;
+    height: 50px;
+    background-image: url('icons/Pikachu_running.gif');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+/* Game Over Div - Add space (air) above and below, keep it inside the game area */
+#game-over {
+    position: absolute;
+    top: 20px; /* Add space from the top */
+    bottom: 20px; /* Add space from the bottom to prevent overflow */
+    left: 50%;
+    transform: translateX(-50%); /* Only horizontally center it */
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    text-align: center;
+    padding: 15px; /* Adjust padding for compactness */
+    border-radius: 15px; /* Rounded corners */
+    display: none;
+    font-size: 16px; /* Adjust font size for better fit */
+    font-family: sans-serif;
+    z-index: 1000;
+    width: 70%; /* Ensure the box is smaller and leaves air on sides */
+    max-width: 500px; /* Prevent box from getting too wide */
+    box-sizing: border-box; /* Ensure padding is considered in size */
+}
+
+/* Input and Button Styles in Game Over Screen */
+#game-over input[type="text"],
+#game-over button:not(#skipBtn) { /* Exclude the Skip button from these styles */
+    display: block;
+    margin: 10px auto;
+    padding: 8px; /* Adjust padding for buttons and input */
+    font-size: 16px; /* Smaller text size to match the overall layout */
+    border-radius: 5px;
+    width: 80%; /* Make sure the input and button don't stretch too much */
+}
+
+#game-over button:not(#skipBtn) { /* Exclude the Skip button from these styles */
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+    padding: 10px 20px; /* Button padding */
+}
+
+#game-over button:not(#skipBtn):hover { /* Exclude the Skip button from hover styles */
+    background-color: #45a049;
+}
+
+/* Add custom styling for the Skip button */
+#skipBtn {
+    background-color: transparent; /* Transparent background */
+    color: white; /* White text */
+    border: 1px solid white; /* White border */
+    cursor: pointer;
+    padding: 5px 15px; /* Smaller padding for a smaller button */
+    font-size: 12px; /* Smaller font size */
+    border-radius: 12px; /* Rounded corners */
+    width: auto; /* Let the button size adjust to the text */
+    margin-top: 5px; /* Slightly smaller margin above the button */
+    text-transform: uppercase; /* Optional: Make text uppercase */
+}
+
+#skipBtn:hover {
+    background-color: rgba(255, 255, 255, 0.2); /* Slight white tint on hover */
+    color: white; /* Keep text white on hover */
+    border-color: white; /* Keep the border white on hover */
+}
+
+/* Score Submitted Message */
+#game-over-confirmation {
+    color: white;
+    background-color: gray;
+    text-align: center;
+    padding: 15px;
+    border-radius: 8px;
+    font-size: 16px; /* Match font size */
+    font-weight: bold;
+    margin-top: 20px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1001;
+    display: none;
+}
+
+/* Score Counter */
+#score-counter {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 10px;
+    font-size: 24px;
+    text-align: center;
+    border-radius: 10px;
+    font-family: sans-serif;
+    z-index: 1000;
+}
+
+/* Logo Styles */
+#logo {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+#logo-image {
+    width: 10%;
+    height: auto;
+}

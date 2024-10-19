@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dinosaur Game</title>
+    <link rel="stylesheet" href="style.css"> <!-- Link to your CSS -->
+</head>
+
+<body>
+    <div id="solid_background"></div> <!-- Solid background at the back -->
+    <div class="game-area"> <!-- Game background frame box here -->
+        <div id="dino"></div>
+        <div id="obstacle"></div>
+        <div id="game-over" style="display: none;">
+            <h1>Game Over!</h1>
+            <!-- Add input field and button for player name -->
+            <label for="playerName">Enter your name:</label>
+            <input type="text" id="playerName" placeholder="Your name">
+            <button id="submitScoreBtn">Submit Score</button>
+            <!-- Skip button -->
+            <button id="skipBtn" style="margin-top: 10px;">Skip</button>
+        </div>
+        <div id="score-counter">Score: 0</div>
+        <div id="logo">
+            <img src="icons/Pokemon_logo.png" alt="Pokemon Logo" id="logo-image">
+        </div>
+        <div id="pokeball">
+            <img src="icons/Pokeball.png" alt="pokéball" id="pokeball-image">
+        </div>
+        <div id="highscore-menu">
+            <div class="pokedex-screen">
+                <h2 id="highscore-title">Highscores</h2>
+                <ul id="highscore-list">
+                    <!-- Dynamically added high scores will appear here -->
+                </ul>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
